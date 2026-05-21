@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OPD Slip Preview - Half A4</title>
+  <style>
+    body {
+      background: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+    .page {
+      /* Half A4 at 96dpi: 210mm x 148.5mm */
+      width: 210mm;
+      height: 148.5mm;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      padding: 8mm 15mm;
+      overflow: hidden;
+      position: relative;
+    }
+    .page::after {
+      content: '--- Half A4 boundary (148.5mm) ---';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 10px;
+      color: #999;
+      border-top: 1px dashed #ccc;
+      padding: 2px;
+      background: #f9f9f9;
+    }
+    .slip {
+      max-width: 100%;
+      margin: 0 auto;
+      border: 2px solid #000;
+      padding: 10px 40px;
+    }
+    .header {
+      text-align: center;
+      border-bottom: 2px dashed #000;
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+    }
+    .hospital-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1e40af;
+    }
+    .hospital-address {
+      font-size: 10px;
+      color: #666;
+      margin-top: 3px;
+    }
+    .hospital-logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #1e293b;
+    }
+    .token-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: #f0f9ff;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .token-number {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1e40af;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .info-row:last-child {
+      border-bottom: none;
+    }
+    .info-label {
+      color: #334155;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .info-value {
+      font-weight: 800;
+      font-size: 13px;
+      color: #1e293b;
+    }
+    .doctor-section {
+      background: #ecfdf5;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin: 6px 0;
+      border-left: 4px solid #059669;
+    }
+    .doctor-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #065f46;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .doctor-name {
+      font-weight: 900;
+      color: #047857;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+    .doctor-spec {
+      font-size: 11px;
+      color: #475569;
+      margin-top: 1px;
+    }
+    .fee-section {
+      background: #fffbeb;
+      border-left: 4px solid #d97706;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .fee-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: #92400e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .fee-amount {
+      font-size: 18px;
+      font-weight: 900;
+      color: #78350f;
+    }
+    .payment-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 900;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+    .opd-number-section {
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .opd-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1e40af;
+      text-transform: uppercase;
+    }
+    .opd-value {
+      font-size: 16px;
+      font-weight: 900;
+      color: #1e40af;
+    }
+    .barcode-section {
+      text-align: center;
+      margin-top: 4px;
+      padding-top: 4px;
+      border-top: 2px dashed #000;
+    }
+    .barcode-placeholder {
+      display: inline-block;
+      padding: 4px 16px;
+    }
+    .barcode-placeholder img {
+      height: 30px;
+    }
+    .barcode-text {
+      font-size: 9px;
+      font-family: monospace;
+      margin-top: 2px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 4px;
+      font-size: 9px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="slip">
+      <!-- Header -->
+      <div class="header">
+        <div class="hospital-logo">DH</div>
+        <div class="hospital-name">Dimag Hospital</div>
+        <div class="hospital-address">
+          42/4 बी, बिल्लोचपुरा, मथुरा रोड, आगरा-2<br>
+          Mobile: 74090 00917
+        </div>
+      </div>
+
+      <!-- Invoice & Date -->
+      <div class="token-section">
+        <div>
+          <span style="font-size:10px;color:#64748b;">Invoice Number</span>
+          <div class="token-number">#0017</div>
+        </div>
+        <div style="text-align:right;">
+          <span style="font-size:10px;color:#64748b;">Date</span>
+          <div style="font-weight:600;color:#334155;">03 Apr 2026</div>
+        </div>
+      </div>
+
+      <!-- Patient Info -->
+      <div style="margin-bottom:6px;">
+        <div class="info-row">
+          <span class="info-label">Patient Name</span>
+          <span class="info-value">SUNIL KUMAR</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Age / Gender</span>
+          <span class="info-value">35 years / Male</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Phone</span>
+          <span class="info-value">9389510490</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Address</span>
+          <span class="info-value">ETAWAH</span>
+        </div>
+      </div>
+
+      <!-- Doctor -->
+      <div class="doctor-section">
+        <div class="doctor-label">Consulting Doctor</div>
+        <div class="doctor-name">I M Singh</div>
+        <div class="doctor-spec">Psychiatrist</div>
+      </div>
+
+      <!-- Fee -->
+      <div class="fee-section">
+        <div>
+          <div class="fee-label">Consultation Fee</div>
+          <div class="fee-amount">₹600</div>
+        </div>
+        <span class="payment-badge">PAID</span>
+      </div>
+
+      <!-- OPD Number -->
+      <div class="opd-number-section">
+        <span class="opd-label">OPD Number</span>
+        <span class="opd-value">#0001</span>
+      </div>
+
+      <!-- Barcode -->
+      <div class="barcode-section">
+        <div class="barcode-placeholder">
+          <div style="font-family:monospace;font-size:20px;letter-spacing:2px;">||||| |||| ||| |||| |||||</div>
+          <div class="barcode-text">OPD-0001</div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        Thank you for choosing Dimag Hospital<br>
+        Please retain this slip for future reference
+      </div>
+    </div>
+  </div>
+</body>
+</html>
