@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button, Badge, Input, Select } from '../../components/ui'
+import { Button, Badge } from '../../components/ui'
 import { patientAPI, billingAPI, serviceAPI, prescriptionAPI } from '../../api/endpoints'
 import { printBillDocument } from '../../utils/printBill'
 import { ConfirmModal, SuccessModal } from '../../components/modal'
@@ -84,7 +84,7 @@ const PatientDetail = () => {
       const [patientRes, reportsRes, prescRes, servicesRes, paymentsRes] = await Promise.all([
         patientAPI.getById(patientId),
         patientAPI.getReports(patientId),
-        patientAPI.getMedicineHistory(patientId),
+        patientAPI.getOpdHistory(patientId),
         patientAPI.getServiceHistory(patientId),
         patientAPI.getPaymentHistory(patientId),
       ])
@@ -372,13 +372,6 @@ const PatientDetail = () => {
     if (s === 'PENDING') return 'bg-red-100 text-red-700'
     if (s === 'PARTIAL') return 'bg-amber-100 text-amber-700'
     return 'bg-slate-100 text-slate-700'
-  }
-
-  // Admit history helpers
-  const getAdmitDays = (admit: any) => {
-    const start = new Date(admit.admissionDate)
-    const end = admit.actualDischarge ? new Date(admit.actualDischarge) : new Date()
-    return Math.max(1, Math.ceil((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)))
   }
 
   // Handle assign service
