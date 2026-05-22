@@ -194,6 +194,14 @@ export const reportAPI = {
     axiosInstance.get('/reports/opd/pdf', { params, responseType: 'blob' }),
 };
 
+// Room Type APIs
+export const roomTypeAPI = {
+  getAll: () => axiosInstance.get('/settings/room-types'),
+  create: (data: Record<string, any>) => axiosInstance.post('/settings/room-types', data),
+  update: (id: string, data: Record<string, any>) => axiosInstance.put(`/settings/room-types/${id}`, data),
+  delete: (id: string) => axiosInstance.delete(`/settings/room-types/${id}`),
+};
+
 // Settings APIs (Phase 14)
 export const settingsAPI = {
   getHospital: () => axiosInstance.get('/settings/hospital'),
