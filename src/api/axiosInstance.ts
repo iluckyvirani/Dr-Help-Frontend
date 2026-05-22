@@ -1,9 +1,9 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig, type AxiosResponse } from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dimarg-backend.vercel.app/api';
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://dr-help-backend.vercel.app/api';
 
 const axiosInstance = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: 'https://dr-help-backend.vercel.app/api',
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ axiosInstance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await axios.post(`${API_BASE_URL}/auth/refresh-token`, {}, {
+        const { data } = await axios.post(`${"https://dr-help-backend.vercel.app/api"}/auth/refresh-token`, {}, {
           withCredentials: true,
         });
         const newToken = data.accessToken;
