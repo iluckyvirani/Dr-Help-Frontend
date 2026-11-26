@@ -1024,8 +1024,8 @@ const BillingDashboard = () => {
                   <img src={hospitalSettings.logo} alt="Logo" className="w-12 h-12 object-contain mx-auto mb-2" />
                 )}
                 <h1 className="text-2xl font-bold text-slate-800">{hospitalSettings.name || 'Dr Help'}</h1>
-                <p className="text-sm text-slate-600">{hospitalSettings.address || '42/4 बी, बिल्लोचपुरा, मथुरा रोड, आगरा-2'}</p>
-                <p className="text-sm text-slate-600">Phone: {hospitalSettings.phone || '74090 00917'}</p>
+                {hospitalSettings.address && <p className="text-sm text-slate-600">{hospitalSettings.address}</p>}
+                {hospitalSettings.phone && <p className="text-sm text-slate-600">Phone: {hospitalSettings.phone}</p>}
                 <p className="text-lg font-semibold text-blue-600 mt-2">FINAL BILL</p>
               </div>
 

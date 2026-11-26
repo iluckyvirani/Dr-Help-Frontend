@@ -64,12 +64,12 @@ const LoginPage = () => {
 
           
           <p className="text-lg text-slate-400 mb-12 max-w-md leading-relaxed">
-            Specialized Psychiatric Care & Mental Health Services. E.C.T., Narco Therapy, Psycho Therapy, Computerized EEG & Complete Diagnostic Services.
+            Complete hospital and clinic management: OPD, patient records, prescriptions, billing, expenses and reports in one place.
           </p>
 
           {/* Feature Pills */}
           <div className="flex flex-wrap gap-3">
-            {['E.C.T.', 'Narco Therapy', 'Psycho Therapy', 'EEG', 'OPD', 'IPD'].map((feature) => (
+            {['OPD', 'Patients', 'Prescriptions', 'Billing', 'Expenses', 'Reports'].map((feature) => (
               <span key={feature} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 backdrop-blur-sm">
                 {feature}
               </span>
@@ -194,8 +194,6 @@ const LoginPage = () => {
           {/* Footer */}
           <p className="text-center text-sm text-slate-400 mt-8">
             © 2026 Dr Help. All rights reserved.
-            <br />
-            <span className="text-xs">42/4 B, Bilochpura, Mathura Road, Agra - 282002</span>
           </p>
         </div>
       </div>

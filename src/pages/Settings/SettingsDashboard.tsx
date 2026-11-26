@@ -752,8 +752,8 @@ const MasterData = () => {
 
   // Specializations (static — derived list, no dedicated API)
   const specializations = [
-    'Psychiatry', 'Clinical Psychology', 'Neurology', 'General Medicine',
-    'Addiction Medicine', 'Child Psychiatry', 'Geriatric Psychiatry',
+    'General Medicine', 'Pediatrics', 'Gynecology', 'Orthopedics', 'Cardiology', 'Dermatology',
+    'ENT', 'Ophthalmology', 'Neurology', 'Dentistry', 'General Surgery', 'Psychiatry',
   ]
 
   // Expense Categories
