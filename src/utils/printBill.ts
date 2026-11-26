@@ -262,7 +262,7 @@ export async function printBillDocument(bill: any) {
     <div class="header">
       ${hospital.logo ? `<img src="${hospital.logo}" alt="Logo" class="hospital-logo" />` : ''}
       <div class="hospital-name">${hospital.name}</div>
-      <div class="hospital-addr">${hospital.address} | Phone: ${hospital.phone}</div>
+      <div class="hospital-addr">${[hospital.address, hospital.phone && `Phone: ${hospital.phone}`].filter(Boolean).join(' | ')}</div>
       <div class="bill-title">FINAL BILL</div>
     </div>
 

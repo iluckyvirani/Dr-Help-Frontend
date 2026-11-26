@@ -5,7 +5,6 @@ import { opdAPI } from '../../api/endpoints'
 import Barcode from 'react-barcode'
 
 
-import defaultLogo from '../../assets/Dimag Hospital logo1.png'
 
 const OPDSlip = () => {
   const { id } = useParams<{ id: string }>()
@@ -351,12 +350,13 @@ const OPDSlip = () => {
             {/* Hospital Header */}
             <div className="header text-center border-b-2 border-dashed border-slate-300 pb-4 mb-4">
               <div className="flex items-center justify-center gap-2 mb-2">
-                <img src={slipData.hospital?.logo || defaultLogo} alt="Hospital Logo" className="w-12 h-12 object-contain hospital-logo" />
+                {slipData.hospital?.logo && <img src={slipData.hospital.logo} alt="Hospital Logo" className="w-12 h-12 object-contain hospital-logo" />}
               </div>
-              <h1 className="hospital-name text-xl font-bold text-blue-700">{slipData.hospital?.name || 'DR HELP'}</h1>
+              <h1 className="hospital-name text-xl font-bold text-blue-700">{slipData.hospital?.name || 'Dr Help'}</h1>
               <p className="hospital-address text-xs text-slate-500 mt-1">
-                {slipData.hospital?.address || '42/4 बी, बिल्लोचपुरा, मथुरा रोड, आगरा-2'}<br />
-                Mobile: {slipData.hospital?.phone || '74090 00917'}
+                {slipData.hospital?.address}
+                {slipData.hospital?.address && <br />}
+                {slipData.hospital?.phone && `Mobile: ${slipData.hospital.phone}`}
               </p>
             </div>
 
